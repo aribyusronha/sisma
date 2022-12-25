@@ -1,6 +1,6 @@
 export 'home.dart';
 export 'splash_screen.dart';
-export 'profile_screen.dart';
+export 'wish_screen.dart';
 export 'search_screen.dart';
 export 'home_screen.dart';
 export 'lab_screen.dart';

@@ -21,15 +21,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-    late List<ProdiDb> wishProdi;
+  late List<ProdiDb> wishProdi;
 
-    String? id;
-    Lembaga? lembaga; 
+  String? id;
+  Lembaga? lembaga;
 
   @override
   Widget build(BuildContext context) {
-       
-
     return Center(
       child: Column(
         children: [
@@ -113,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onChanged: (value) {
                         setState(() {
                           id = value!.idSms.toString();
-                          lembaga = value;                          
+                          lembaga = value;
                         });
                       },
                       selectedItem: null,
@@ -123,14 +121,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Card(
-            elevation: 5,
-            margin: const EdgeInsets.all(10),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: BottomCard(lembaga),
-            
-          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Card(
+              elevation: 5,
+              margin: const EdgeInsets.all(10),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: BottomCard(lembaga),
+              ),
+            ),
           ),
         ],
       ),
@@ -142,35 +142,37 @@ Widget BottomCard(Lembaga? prodis) {
   if (prodis == null) {
     return Center(
       child: Container(
-        width: double.infinity,        
+        width: double.infinity,
         child: const Text('Silakan Pilih Prodi'),
       ),
     );
   } else {
     return SizedBox(
-        width: double.infinity,    
-        child: Column(
+        width: double.infinity,
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          ListTile(
+            title: Center(
+                child: Text(
+                    '${prodis.nmLemb.toString()} (${prodis.nmJenjDidik.toString()})',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold))),
+            trailing: const Icon(
+              Icons.bookmark_add,
+              color: Colors.blue,
+              size: 30,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-            ListTile(
-                title: Center(child: Text('${prodis.nmLemb.toString()} (${prodis.nmJenjDidik.toString()})', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-                trailing: const Icon(Icons.bookmark_add, color: Colors.blue,size: 30,),
-            ),        
-            const SizedBox(height: 10),
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                    Text('Akreditasi Prodi : ${prodis.statProdi}'),
-                    const SizedBox(height: 10),        
-                    Text('Berdiri Sejak : ${prodis.tglBerdiri}'),
-                    const SizedBox(height: 10),
-                    Text('Gelar Lulusan : ${prodis.gelarLulusan}'),
-                ],
-            )
-            
-        ]
-        )
-
-    );
+            children: [
+              Text('Akreditasi Prodi : ${prodis.statProdi}'),
+              const SizedBox(height: 10),
+              Text('Berdiri Sejak : ${prodis.tglBerdiri}'),
+              const SizedBox(height: 10),
+              Text('Gelar Lulusan : ${prodis.gelarLulusan}'),
+            ],
+          )
+        ]));
   }
 }
