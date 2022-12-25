@@ -18,9 +18,27 @@ class _HomeState extends State<Home> {
   static const String prefSelectedIndexKey = 'selectedTab';
   static List<Widget> pages = <Widget>[
     const HomeScreen(),
-    SearchScreen(),
+    const SearchScreen(),
     const ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentIndex();   
+  }
+
+  void getCurrentIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey(prefSelectedIndexKey)) {
+      setState(() {
+        final index = prefs.getInt(prefSelectedIndexKey);
+        if (index != null) {
+          _selectedIndex = index;
+        }
+      });
+    }
+  }
   
   @override
   Widget build(BuildContext context) {

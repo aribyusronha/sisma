@@ -12,7 +12,11 @@ class JurusanScreen extends StatelessWidget{
   
    @override
     Widget build(BuildContext context) {                
-        return FutureBuilder(
+        return Scaffold(
+      appBar: AppBar(
+        title: const Text('Jurusan'),
+      ),
+      body:  FutureBuilder(
         future: ApiOneData.getJurusan(),
 
         builder: (context, AsyncSnapshot<List<Lembaga>> snapshot) {
@@ -24,6 +28,6 @@ class JurusanScreen extends StatelessWidget{
             );
         }
       },
-    );
+    ));
     }
 }

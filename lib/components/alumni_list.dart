@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sisma/models/lembaga_model.dart';
 
 import '../models/models.dart';
-import 'mahasiswa_card.dart';
+import 'alumni_card.dart';
 
-class MahasiswaList extends StatelessWidget {
-  final List<Mahasiswa> mahasiswa;
+class AlumniList extends StatelessWidget {
+  final List<Alumni> alumni;
 
-  const MahasiswaList({
+  const AlumniList({
     super.key, 
-    required this.mahasiswa
+    required this.alumni
     });
 
   @override
@@ -18,13 +18,13 @@ class MahasiswaList extends StatelessWidget {
         height: 500,
         width: double.infinity,
       child: ListView.builder(
-        itemCount: mahasiswa.length,
+        itemCount: alumni.length,
         scrollDirection: Axis.vertical,
         controller: ScrollController(keepScrollOffset: true),
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          final mahasiswas = mahasiswa[index];
-          return MahasiswaCard(mahasiswa: mahasiswas);
+          final alumnis = alumni[index];
+          return AlumniCard(alumni: alumnis);
         },
       ),
     );

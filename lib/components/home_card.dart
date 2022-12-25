@@ -5,37 +5,32 @@ import '../screen/screens.dart';
 
 class HomeCard extends StatelessWidget{
     final List lembaga = [
-        'Laboratorium',
         'UPT',
         'Rektorat',
-        'Penyelengara MKU',
         'Fakultas',
         'Jurusan'
         
     ];
 
     final List icon = [
-        Icons.business,
-        Icons.cabin,
-        Icons.apartment,
+        Icons.business,        
         Icons.account_balance,
-        Icons.blinds_closed,
-        Icons.book,
-        Icons.book_online,
-
+        Icons.apartment,
+        Icons.blinds_closed,            
     ];
 
     HomeCard({super.key});
     
       @override
     Widget build(BuildContext context) {
-        return Container(
-             width: double.maxFinite,
-      margin: const EdgeInsets.only(left: 10, right: 10),
-      height: 320,
+        return Container(   
+            width: double.infinity,  
+            height: 100,       
+            margin: const EdgeInsets.only(left: 10, right: 10),
       child: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+          crossAxisCount: 4,
+            mainAxisSpacing: 10,
           crossAxisSpacing: 10,          
         ),
         children: [
@@ -50,8 +45,8 @@ class HomeCard extends StatelessWidget{
     return Card(
       elevation: 5,
       child: SizedBox(    
-        height: 50,
-        width: 50,
+        height: 30,
+        width: 30,
         child: GestureDetector(
           onTap: () {
             goToSelectedMenu(context, index, namaLembaga);            
@@ -79,7 +74,7 @@ class HomeCard extends StatelessWidget{
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return const LabScreen();
+            return const UptScreen();
           },
         ),
       );
@@ -89,7 +84,7 @@ class HomeCard extends StatelessWidget{
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return const UptScreen();
+            return const RektoratScreen();
           },
         ),
       );
@@ -99,7 +94,7 @@ class HomeCard extends StatelessWidget{
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return const RektoratScreen();
+            return const FakultasScreen();
           },
         ),
       );
@@ -109,31 +104,12 @@ class HomeCard extends StatelessWidget{
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return const PenyScreen();
-          },
-        ),
-      );
-    }
-    else if (index == 4){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) {
-            return const FakultasScreen();
-          },
-        ),
-      );
-    }
-    else if (index == 5){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) {
             return const JurusanScreen();
           },
         ),
       );
-    }
+    }    
+    
   }
 
     

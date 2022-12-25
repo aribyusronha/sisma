@@ -10,7 +10,11 @@ class PenyScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Penyelengara MKU'),
+      ),
+      body:  FutureBuilder(
             future: ApiOneData.getPeny(),
             builder: (context, AsyncSnapshot<List<Lembaga>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -21,7 +25,8 @@ class PenyScreen extends StatelessWidget{
                     );
                 }
             }
-        );
+        )
+    );
   }
 
 }

@@ -1,24 +1,24 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:sisma/screen/screens.dart';
+import 'package:sisma/models/models.dart';
 
 import '../api/api_one_data.dart';
-import '../components/lembaga_list.dart';
 import '../components/mahasiswa_list.dart';
-import '../models/models.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class MahasiswaScreen extends StatefulWidget{
+    final String? id;
+  const MahasiswaScreen({super.key, required this.id});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<MahasiswaScreen> createState() => _MahasiswaScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  String id = '54BBD27B-2376-4CAE-9951-76EF54BD2CA2';
-
+class _MahasiswaScreenState extends State<MahasiswaScreen> {    
+    String tahun = '2020';
   @override
   Widget build(BuildContext context) {
+    
+
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -30,13 +30,13 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  DropdownSearch<Lembaga>(
+                  DropdownSearch<Mahasiswa>(
                     popupProps: PopupProps.dialog(
                       itemBuilder: (context, item, isSelected) {
                         return Container(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            item.nmLemb.toString(),
+                            item.periode_masuk.toString(),
                             style: TextStyle(
                                 color: isSelected
                                     ? Colors.white
@@ -48,10 +48,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       showSearchBox: true,
                     ),
                     asyncItems: (text) {
-                      return ApiOneData.getProdi();
+                      return ApiOneData.getMahasiswaByProdi(widget.id!);
                     },
                     dropdownBuilder: (context, selectedItem) =>
-                        Text(selectedItem?.nmLemb.toString() ?? 'Pilih Prodi'),
+                        Text(selectedItem?.periode_masuk.toString() ?? 'Pilih Prodi'),
                     dropdownDecoratorProps: const DropDownDecoratorProps(
                       dropdownSearchDecoration: InputDecoration(
                         labelText: "Pilih Prodi",
@@ -59,12 +59,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        id = value!.idSms.toString();
-                        print(id);
+                        tahun = value!.periode_masuk.toString();
+                        print(tahun);
                       });
                     },
                     selectedItem: null,
-                  ),
+                  ),                  
                 ],
               ),
             ),
@@ -72,19 +72,22 @@ class _SearchScreenState extends State<SearchScreen> {
           Card(
             elevation: 5,
             margin: const EdgeInsets.all(10),
-            child:
-                Padding(padding: const EdgeInsets.all(10), child: getMhs(id)),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: getMhs(widget.id!,tahun),
+            ),
           )
+          
         ],
       ),
     );
   }
 
-  Widget getMhs(String idMhs) {
+  Widget getMhs(String idMhs, String angkatan) {
     return FutureBuilder<List<Mahasiswa>>(
-        future: ApiOneData.getMahasiswaByProdi(id),
+        future: ApiOneData.getMahasiswaByTahun(idMhs, angkatan),
         builder: (context, snapshot) {
-          if (id != null) {
+          if (widget.id != null && tahun != null) {
             if (snapshot.connectionState == ConnectionState.done) {
               return MahasiswaList(mahasiswa: snapshot.data ?? []);
             } else {

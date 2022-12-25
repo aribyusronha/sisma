@@ -1,33 +1,30 @@
 class ProdiDb{
     String? idSms;
     String? nmLemb;
-    String? idFakUnila;
-    String? idJurUnila;
-    String? kodeProdi;
+    String? status;
+    String? gelar;    
 
     ProdiDb({
         this.idSms,
         this.nmLemb,
-        this.idFakUnila,
-        this.idJurUnila,
-        this.kodeProdi,
+        this.status,
+        this.gelar,        
     });
 
     ProdiDb.fromJson(Map<String, dynamic> json) {
         idSms = json['id_sms'];
         nmLemb = json['nm_lemb'];
-        idFakUnila = json['id_fak_unila'];
-        idJurUnila = json['id_jur_unila'];
-        kodeProdi = json['kode_prodi'];
+        status = json['stat_prodi'];
+        gelar = json['gelar_lulusan'];        
     }
 
     Map<String, dynamic> toJson() {
         final Map<String, dynamic> data = new Map<String, dynamic>();
         data['id_sms'] = idSms;
         data['nm_lemb'] = nmLemb;
-        data['id_fak_unila'] = idFakUnila;
-        data['id_jur_unila'] = idJurUnila;
-        data['kode_prodi'] = kodeProdi;
+        data['stat_prodi'] = status;
+        data['gelar_lulusan'] = gelar;
+        
         return data;
     }
 
@@ -39,23 +36,20 @@ class ProdiDb{
         if (nmLemb != null) {
             map['nm_lemb'] = nmLemb;
         }
-        if (idFakUnila != null) {
-            map['id_fak_unila'] = idFakUnila;
+        if (status != null) {
+            map['stat_prodi'] = status;
         }
-        if (idJurUnila != null) {
-            map['id_jur_unila'] = idJurUnila;
+        if (gelar != null) {
+            map['gelar_lulusan'] = gelar;
         }
-        if (kodeProdi != null) {
-            map['kode_prodi'] = kodeProdi;
-        }
+       
         return map;
     }
 
     ProdiDb.fromMap(Map<dynamic, dynamic> map) {
         idSms = map['id_sms'];
         nmLemb = map['nm_lemb'];
-        idFakUnila = map['id_fak_unila'];
-        idJurUnila = map['id_jur_unila'];
-        kodeProdi = map['kode_prodi'];
+        status = map['stat_prodi'];
+        gelar = map['gelar_lulusan'];        
     }
 }

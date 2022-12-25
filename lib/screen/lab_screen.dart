@@ -8,7 +8,11 @@ class LabScreen extends StatelessWidget{
   const LabScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Laboratorium'),
+      ),
+      body:  FutureBuilder(
             future: ApiOneData.getLab(),
             builder: (context, AsyncSnapshot<List<Lembaga>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
@@ -19,7 +23,8 @@ class LabScreen extends StatelessWidget{
                     );
                 }
             }
-        );
+      )
+    );
   }
 
 }

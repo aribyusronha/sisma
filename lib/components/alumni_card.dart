@@ -3,10 +3,10 @@ import 'package:sisma/models/lembaga_model.dart';
 
 import '../models/models.dart';
 
-class MahasiswaCard extends StatelessWidget{
-    final Mahasiswa mahasiswa;
+class AlumniCard extends StatelessWidget{
+    final Alumni alumni;
 
-  const MahasiswaCard({super.key, required this.mahasiswa});
+  const AlumniCard({super.key, required this.alumni});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class MahasiswaCard extends StatelessWidget{
           child: Column(
               children: <Widget>[            
                   ListTile(
-                      title: Text(mahasiswa.nama_mahasiswa.toString()),
-                      subtitle: Text(mahasiswa.npm.toString()),
-                      trailing: Text(mahasiswa.ipk.toString(), style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.blue),),
+                      title: Text(alumni.nama_alumni.toString()),
+                      subtitle: Text(alumni.npm.toString()),
+                      trailing: Text(alumni.ipk.toString(), style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.blue),),
                   ),
               ],
           ),

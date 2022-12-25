@@ -232,7 +232,7 @@ class ApiOneData {
         } else {
             throw Exception('Failed to load prodi');
         }
-    }
+    }        
 
     static Future<List<Mahasiswa>> getMahasiswaByProdi(String id) async {
         var url = 'http://onedata.unila.ac.id/api/live/0.1/mahasiswa/list_mahasiswa?page=1&limit=50&sort_by=ASC&id_prodi=$id';
@@ -243,23 +243,86 @@ class ApiOneData {
         final response = await http.get(
             headers: header,
             Uri.parse(url),
-        );       
-
-        print(response.statusCode);
+        );               
         if (response.statusCode == 200) {
             
         final Map<String, dynamic> json = jsonDecode(response.body);        
             if (json['data'] != null) {  
                 final mhs = <Mahasiswa>[];
             
-                json['data'].forEach((v) { 
-                    if(v['id_prodi'] == id){
-                        mhs.add(Mahasiswa.fromJson(v));   
-                    }
+                json['data'].forEach((v) {                 
+                    mhs.add(Mahasiswa.fromJson(v));                       
                 });      
-
+                
                 print(mhs);
+
                 return mhs;       
+
+            } else {         
+                return [];
+            }
+        } else {
+            throw Exception('Failed to load prodi');
+        }
+    }
+
+    static Future<List<Mahasiswa>> getMahasiswaByTahun(String id,String tahun) async {
+        var url = 'http://onedata.unila.ac.id/api/live/0.1/mahasiswa/list_mahasiswa?page=1&limit=50&sort_by=ASC&id_prodi=$id';
+
+        authApi();        
+
+        var header = {"Authorization": "bearer$token"};
+        final response = await http.get(
+            headers: header,
+            Uri.parse(url),
+        );               
+        if (response.statusCode == 200) {
+            
+        final Map<String, dynamic> json = jsonDecode(response.body);        
+            if (json['data'] != null) {  
+                final mhs = <Mahasiswa>[];
+            
+                json['data'].forEach((v) {   
+                    if(v['periode_masuk'] == tahun){
+                        mhs.add(Mahasiswa.fromJson(v));   
+                    }                                  
+                });      
+                
+                print(mhs);
+
+                return mhs;       
+
+            } else {         
+                return [];
+            }
+        } else {
+            throw Exception('Failed to load prodi');
+        }
+    }
+
+    static Future<List<Alumni>> getAlumni(String id,String tahun) async {
+        var url = 'http://onedata.unila.ac.id/api/live/0.1/mahasiswa/list_alumni?page=1&limit=50&sort_by=ASC&tahun_lulus=$tahun&id_prodi=$id';
+
+        authApi();        
+
+        var header = {"Authorization": "bearer$token"};
+        final response = await http.get(
+            headers: header,
+            Uri.parse(url),
+        );               
+        if (response.statusCode == 200) {
+            
+        final Map<String, dynamic> json = jsonDecode(response.body);        
+            if (json['data'] != null) {  
+                final almni = <Alumni>[];
+            
+                json['data'].forEach((v) {                 
+                    almni.add(Alumni.fromJson(v));                       
+                });      
+                
+                print(almni);
+
+                return almni;       
 
             } else {         
                 return [];
@@ -393,8 +456,7 @@ class ApiOneData {
                         rektorat.add(Lembaga.fromJson(v));   
                     }
                 });      
-
-                print(rektorat);
+                
                 return rektorat;       
 
             } else {         

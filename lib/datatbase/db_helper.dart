@@ -1,68 +1,71 @@
-// import 'package:sisma/models/prodi_db.dart';
-// import 'package:sqflite/sqflite.dart';
-// import 'package:sqflite/sqlite_api.dart';
-// import 'package:path/path.dart';
+import 'package:sisma/models/prodi_db.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqlite_api.dart';
+import 'package:path/path.dart';
 
-// class DBHelper {
-//   static final DBHelper _instance = DBHelper._internal();
-//   static Database? database;
+class DBHelper {
+  static final DBHelper _instance = DBHelper._internal();
+  static Database? database;
 
 
-//   final String tableName= 'prodi';
-//   final String id = 'id';
-//   final String nmProdi = 'nama_prodi';
+  final String tableName= 'prodi';
+  final String id = 'id';
+  final String nmProdi = 'nama_prodi';
+  final String akred = 'akred';
+  final String gelar = 'gelar';
 
-//   DBHelper._internal();
-//   factory DBHelper() => _instance;
 
-//   Future<Database?> get _db async {
-//     if (database != null) {
-//       return database;
-//     } else {
-//       database = await _initDb();
+  DBHelper._internal();
+  factory DBHelper() => _instance;
 
-//       return database;
-//     }
-//   }
+  Future<Database?> get _db async {
+    if (database != null) {
+      return database;
+    } else {
+      database = await _initDb();
 
-//   Future<Database?> _initDb() async {
-//     String databasePath = await getDatabasesPath();
-//     String path = join(databasePath, 'sisma.db');
+      return database;
+    }
+  }
 
-//     return await openDatabase(
-//       path,
-//       version: 1,
-//       onCreate: _onCreate,
-//     );
-//   }
+  Future<Database?> _initDb() async {
+    String databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'sisma.db');
 
-//   Future<void> _onCreate(Database db, int version) async {
-//     var sql = 'CREATE TABLE $tableName ($id INTEGER PRIMARY KEY, $nmProdi VARCHAR(255)';        
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _onCreate,
+    );
+  }
 
-//     await db.execute(sql);
-//   }
+  Future<void> _onCreate(Database db, int version) async {
+    var sql = 'CREATE TABLE $tableName ($id INTEGER PRIMARY KEY, $nmProdi VARCHAR(255)';        
 
-//   Future<int?> addProdi(ProdiDb prodi) async {
-//     var dbClient = await database;
-//     return await dbClient!.insert(
-//       tableName,
-//       prodi.toMap(),
-//     );
-//   }
+    await db.execute(sql);
+  }
 
-//     Future<List<ProdiDb>> getProdi() async {
-//         var dbClient = await database;
-//         List<Map> maps = await dbClient!.query(
-//         tableName,
-//         columns: [id, nmProdi],
-//         );
+  Future<int?> addProdi(ProdiDb prodi) async {
+    var dbClient = await database;
+    return await dbClient!.insert(
+      tableName,
+      prodi.toMap(),
+    );
+  }
+
+    Future<List<ProdiDb>> getProdi() async {
+        var dbClient = await database;
+        List<Map> maps = await dbClient!.query(
+        tableName,
+        columns: [id, nmProdi],
+        );
     
-//         List<ProdiDb> prodi = [];
-//         if (maps.isNotEmpty) {
-//         for (int i = 0; i < maps.length; i++) {
-//             prodi.add(ProdiDb.fromMap(maps[i]));
-//         }
-//         }
-//         return prodi;
-//     }
-// }
+        List<ProdiDb> prodi = [];
+        if (maps.isNotEmpty) {
+        for (int i = 0; i < maps.length; i++) {
+            prodi.add(ProdiDb.fromMap(maps[i]));
+        }
+        }
+        return prodi;
+    }
+}
