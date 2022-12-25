@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sisma/screen/splash_screen.dart';
+import 'screen/screens.dart';
 
 void main() {
   runApp(const MyApp());

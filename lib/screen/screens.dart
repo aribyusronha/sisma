@@ -1,0 +1,11 @@
+export 'home.dart';
+export 'splash_screen.dart';
+export 'profile_screen.dart';
+export 'search_screen.dart';
+export 'home_screen.dart';
+export 'lab_screen.dart';
+export 'rektorat_screen.dart';
+export 'upt_screen.dart';
+export 'fakultas_screen.dart';
+export 'prodi_screen.dart';
+export 'peny_screen.dart';
