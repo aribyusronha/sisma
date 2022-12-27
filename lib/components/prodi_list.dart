@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sisma/models/prodi_model.dart';
 
 import '../models/models.dart';
 import 'prodi_card.dart';
 
 class ProdiList extends StatelessWidget {
-  final List<ProdiDb> prodi;
+  final List<Lembaga> prodi;
 
   const ProdiList({
     super.key, 

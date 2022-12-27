@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:sisma/models/models.dart';
-import 'package:sisma/screen/jurusan_screen.dart';
 
 class LembagaCard extends StatefulWidget {
   final Lembaga lembaga;

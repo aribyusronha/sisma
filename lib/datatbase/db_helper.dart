@@ -1,3 +1,4 @@
+import 'package:sisma/models/lembaga_model.dart';
 import 'package:sisma/models/prodi_db.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
@@ -45,25 +46,34 @@ class DBHelper {
     await db.execute(sql);
   }
 
-  Future<int?> addProdi(ProdiDb prodi) async {
+  Future<int?> addProdi(Lembaga prodi) async {
     var dbClient = await database;
-    return await dbClient!.insert(
+    return await dbClient?.insert(
       tableName,
       prodi.toMap(),
     );
   }
 
-    Future<List<ProdiDb>> getProdi() async {
+    Future<int?> deleteProdi(String id) async {
+        var dbClient = await database;
+        return await dbClient?.delete(
+        tableName,
+        where: '$id = ?',
+        whereArgs: [id],
+        );
+    }
+
+    Future<List<Lembaga>> getProdi() async {
         var dbClient = await database;
         List<Map> maps = await dbClient!.query(
         tableName,
         columns: [id, nmProdi],
         );
     
-        List<ProdiDb> prodi = [];
+        List<Lembaga> prodi = [];
         if (maps.isNotEmpty) {
         for (int i = 0; i < maps.length; i++) {
-            prodi.add(ProdiDb.fromMap(maps[i]));
+            prodi.add(Lembaga.fromMap(maps[i]));
         }
         }
         return prodi;

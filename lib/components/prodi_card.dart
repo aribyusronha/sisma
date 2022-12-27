@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sisma/models/lembaga_model.dart';
 
 import '../models/models.dart';
 
 class ProdiCard extends StatelessWidget{
-    final ProdiDb prodi;
+    final Lembaga prodi;
 
   const ProdiCard({super.key, required this.prodi});
 
@@ -18,8 +17,8 @@ class ProdiCard extends StatelessWidget{
               children: <Widget>[            
                   ListTile(
                       title: Text(prodi.nmLemb.toString()),
-                      subtitle: Text(prodi.gelar.toString()),
-                      trailing: Text(prodi.status.toString(), style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.blue),),
+                      subtitle: Text(prodi.gelarLulusan.toString()),
+                      trailing: Text(prodi.statProdi.toString(), style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Colors.blue),),
                   ),
               ],
           ),

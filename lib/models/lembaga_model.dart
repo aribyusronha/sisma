@@ -85,4 +85,52 @@ class Lembaga {
     data['terakhir_diubah'] = this.terakhirDiubah;
     return data;
   }
+
+  Lembaga.fromMap(Map<dynamic, dynamic> map) {
+    idSms = map['id_sms'];
+    nmJnsSms = map['nm_jns_sms'];
+    nmLemb = map['nm_lemb'];
+    idFakUnila = map['id_fak_unila'];
+    idJurUnila = map['id_jur_unila'];
+    kodeProdi = map['kode_prodi'];
+    noTel = map['no_tel'];
+    noFax = map['no_fax'];
+    email = map['email'];
+    tglBerdiri = map['tgl_berdiri'];
+    sksLulus = map['sks_lulus'];
+    gelarLulusan = map['gelar_lulusan'];
+    statProdi = map['stat_prodi'];
+    nmJenjDidik = map['nm_jenj_didik'];
+    idJnsSms = map['id_jns_sms'];
+    idWil = map['id_wil'];
+    idIndukSms = map['id_induk_sms'];
+    waktuDataDitambahkan = map['waktu_data_ditambahkan'];
+    terakhirDiubah = map['terakhir_diubah'];
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id_sms': idSms,
+      'nm_jns_sms': nmJnsSms,
+      'nm_lemb': nmLemb,
+      'id_fak_unila': idFakUnila,
+      'id_jur_unila': idJurUnila,
+      'kode_prodi': kodeProdi,
+      'no_tel': noTel,
+      'no_fax': noFax,
+      'email': email,
+      'tgl_berdiri': tglBerdiri,
+      'sks_lulus': sksLulus,
+      'gelar_lulusan': gelarLulusan,
+      'stat_prodi': statProdi,
+      'nm_jenj_didik': nmJenjDidik,
+      'id_jns_sms': idJnsSms,
+      'id_wil': idWil,
+      'id_induk_sms': idIndukSms,
+      'waktu_data_ditambahkan': waktuDataDitambahkan,
+      'terakhir_diubah': terakhirDiubah,
+    };
+  }
+
+  
 }

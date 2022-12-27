@@ -10,7 +10,7 @@ class WishScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
           future: DBHelper().getProdi(),
-          builder: (context, AsyncSnapshot<List<ProdiDb>> snapshot) {
+          builder: (context, AsyncSnapshot<List<Lembaga>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return ProdiList(prodi: snapshot.data ?? []);
             } else {

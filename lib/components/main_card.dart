@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sisma/models/models.dart';
 
 import '../screen/alumni_screen.dart';
-import '../screen/jurusan_screen.dart';
-import '../screen/mahasiswa_screen.dart';
 import '../screen/screens.dart';
 
 class MainCard extends StatelessWidget {

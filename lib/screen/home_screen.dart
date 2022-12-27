@@ -1,19 +1,12 @@
-import 'dart:typed_data';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sisma/api/api_one_data.dart';
-import 'package:sisma/components/lembaga_card.dart';
-import 'package:sisma/components/lembaga_list.dart';
 import 'package:sisma/components/home_card.dart';
-import 'package:sisma/components/main_card.dart';
-import 'package:sisma/models/fakultas_model.dart';
-import 'package:sisma/models/lembaga_model.dart';
 
+import '../datatbase/db_helper.dart';
 import '../models/models.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {  
   const HomeScreen({super.key});
 
   @override
@@ -21,10 +14,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late List<ProdiDb> wishProdi;
+  late List<Lembaga> wishProdi;
+  DBHelper dbHelper = DBHelper();
+  bool _isFavorited = false;
+  
 
   String? id;
   Lembaga? lembaga;
+
+  @override
+  void initState() {
+    dbHelper.getProdi().then((value) {
+      setState(() {
+        wishProdi = value;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    DropdownSearch<Lembaga>(
-                      popupProps: PopupProps.dialog(
+                    DropdownSearch<Lembaga>(                    
+                      popupProps: PopupProps.dialog(                        
                         itemBuilder: (context, item, isSelected) {
                           return Container(
                             padding: const EdgeInsets.all(10),
@@ -96,15 +102,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                         },
-                      ),
+                        showSearchBox: true,
+                      ),                      
                       asyncItems: (text) {
                         return ApiOneData.getProdi();
                       },
+                      itemAsString: (item) => item.nmLemb.toString(),
                       dropdownBuilder: (context, selectedItem) => Text(
                           selectedItem?.nmLemb.toString() ??
                               'Silakan Pilih Prodi'),
                       dropdownDecoratorProps: const DropDownDecoratorProps(
                         dropdownSearchDecoration: InputDecoration(
+
                           labelText: "Pilih Prodi",
                         ),
                       ),
@@ -113,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           id = value!.idSms.toString();
                           lembaga = value;
                         });
-                      },
+                      },                        
                       selectedItem: null,
                     ),
                   ],
@@ -136,17 +145,19 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
 
-Widget BottomCard(Lembaga? prodis) {
+  Widget BottomCard (Lembaga? prodis) {
+    
   if (prodis == null) {
     return Center(
       child: Container(
         width: double.infinity,
-        child: const Text('Silakan Pilih Prodi'),
+        child: const Text('Silakan Pilih Prodi',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
       ),
     );
-  } else {
+  } else {    
     return SizedBox(
         width: double.infinity,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -156,11 +167,31 @@ Widget BottomCard(Lembaga? prodis) {
                     '${prodis.nmLemb.toString()} (${prodis.nmJenjDidik.toString()})',
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold))),
-            trailing: const Icon(
-              Icons.bookmark_add,
-              color: Colors.blue,
-              size: 30,
-            ),
+            trailing: IconButton(
+          icon: (_isFavorited? 
+                const Icon(
+                  Icons.bookmark_added,
+                  color: Colors.blue,
+                )
+              : const Icon(
+                  Icons.bookmark_add,
+                  color: Colors.grey,
+                )), onPressed: () {
+                    if(_isFavorited){
+                        dbHelper.deleteProdi(prodis.idSms.toString());
+                    }
+                    else{
+                        dbHelper.addProdi(prodis);
+                    }
+                    setState(() {
+                        if (_isFavorited) {
+                            _isFavorited = false;
+                        } else {
+                            _isFavorited = true;
+                        }
+                    });
+                },          
+        ),
           ),
           const SizedBox(height: 10),
           Column(
@@ -176,3 +207,10 @@ Widget BottomCard(Lembaga? prodis) {
         ]));
   }
 }
+}
+
+
+
+
+
+

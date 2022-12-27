@@ -1,9 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:sisma/screen/screens.dart';
 
 import '../api/api_one_data.dart';
-import '../components/lembaga_list.dart';
 import '../components/mahasiswa_list.dart';
 import '../models/models.dart';
 
@@ -46,10 +44,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       },
                       //showSelectedItems: true,
                       showSearchBox: true,
-                    ),
+                    ),            
                     asyncItems: (text) {
                       return ApiOneData.getProdi();
                     },
+                    itemAsString: (item) => item.nmLemb.toString(),
                     dropdownBuilder: (context, selectedItem) =>
                         Text(selectedItem?.nmLemb.toString() ?? 'Pilih Prodi'),
                     dropdownDecoratorProps: const DropDownDecoratorProps(

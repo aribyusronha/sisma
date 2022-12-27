@@ -23,7 +23,9 @@ class ApiOneData {
                 },
             );  
 
-        String hasil = authApi.data["data"]["type"] + authApi.data["data"]["token"];
+        String hasil = authApi.data["data"]["token_bearer"];
+
+        print(hasil);
 
         token = hasil;
     } 
@@ -33,7 +35,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -65,7 +67,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -99,7 +101,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -133,7 +135,7 @@ class ApiOneData {
 
         authApi();        
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -169,7 +171,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -203,7 +205,7 @@ class ApiOneData {
 
         authApi();        
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -239,7 +241,7 @@ class ApiOneData {
 
         authApi();        
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -271,7 +273,7 @@ class ApiOneData {
 
         authApi();        
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -305,7 +307,7 @@ class ApiOneData {
 
         authApi();        
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -337,7 +339,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -371,7 +373,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -405,7 +407,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),
@@ -439,7 +441,7 @@ class ApiOneData {
 
         authApi();
 
-        var header = {"Authorization": "bearer$token"};
+        var header = {"Authorization": "$token"};
         final response = await http.get(
             headers: header,
             Uri.parse(url),

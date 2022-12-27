@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sisma/models/lembaga_model.dart';
 
 import '../models/models.dart';
 import 'mahasiswa_card.dart';
